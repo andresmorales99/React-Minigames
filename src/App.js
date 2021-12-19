@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import ActionBar from './fragments/ActionBar';
+import Navbar from './fragments/Navbar';
+import Welcome from './fragments/Welcome'
+import { BrowserRouter as Router,useRoutes} from "react-router-dom";
+import Quiz from './redux_quiz/ReduxProvider';
+import TicTacToe from './redux_tic/ReduxProvider';
+import { View } from 'react-native';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const Rutas = () => {
+  let routes = useRoutes([
+    { path: "/", element: <Welcome /> },
+    {path:"/tictactoe", element:<TicTacToe />},
+    {path:"/quiz", element: <Quiz />}
+    // ...
+  ]);
+  return routes;
+};
 
-export default App;
+export default function App(){
+    //console.log("Printing:" + this.props.quizzes.length)
+    return(
+      <div>
+        <View style={{backgroundColor:'darkblue'}}>
+          <Navbar style={{flex: '1'}}/>
+        </View>
+        <Rutas />
+      </div>
+    );
+  }
